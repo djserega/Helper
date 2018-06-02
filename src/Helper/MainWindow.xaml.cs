@@ -20,9 +20,36 @@ namespace Helper
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string MessageSubject { get; set; }
+        public string MessageText { get; set; }
+
+
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = this;
+        }
+
+        private void ButtonSendMessage_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(MessageSubject))
+            {
+                MessageBox.Show("Не заполнена тема.");
+                TextBoxMessageSubject.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(MessageText))
+            {
+                MessageBox.Show("Не заполнено описание.");
+                TextBoxMessageText.Focus();
+                return;
+            }
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

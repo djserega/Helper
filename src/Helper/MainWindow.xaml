@@ -22,7 +22,7 @@
             <Separator Height="1" Background="{x:Null}"/>
 
             <StackPanel Orientation="Horizontal">
-                <Label Content="Сообщение" MinWidth="80" Foreground="LightSteelBlue"/>
+                <Label Content="Описание" MinWidth="80" Foreground="LightSteelBlue"/>
                 <TextBox x:Name="TextBoxMessageText" Text="{Binding MessageText}" Background="LightSteelBlue" Foreground="Teal" TextWrapping="Wrap" AcceptsReturn="True" Height="175" Width="300"/>
             </StackPanel>
 
@@ -30,7 +30,7 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Separator Width="15" Background="{x:Null}"/>
-                <Button x:Name="ButtonSendMessage" Foreground="LightSteelBlue" Content="Отправить сообщение">
+                <Button x:Name="ButtonSendMessage" Foreground="LightSteelBlue" Content="Отправить сообщение" Click="ButtonSendMessage_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border x:Name="border" BorderThickness="0" Background="{x:Null}">
@@ -56,7 +56,7 @@
                     </Button.Template>
                 </Button>
                 <Separator Width="15" Background="{x:Null}"/>
-                <Button x:Name="ButtonCancel" Foreground="LightSteelBlue" Content=" Отменить ">
+                <Button x:Name="ButtonCancel" Foreground="LightSteelBlue" Content="Отменить" Click="ButtonCancel_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border x:Name="border" Background="{x:Null}">
