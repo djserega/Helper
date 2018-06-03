@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Helper"
         mc:Ignorable="d"
-        Background="Teal" WindowStyle="ToolWindow"
+        Background="Teal" 
         x:Name="FormMainWindow" Title="Helper. TEXT LOGO"
         Height="315" Width="400" ResizeMode="NoResize" Topmost="True"
-        Closed="FormMainWindow_Closed">
+        Closed="FormMainWindow_Closed" Icon="pack://siteoforigin:,,,/Resources/helper.png">
     <Grid>
         <StackPanel Orientation="Vertical">
 
