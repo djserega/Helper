@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Background="Teal" WindowStyle="ToolWindow"
         x:Name="FormMainWindow" Title="Helper. TEXT LOGO"
-        Height="315" Width="400" ResizeMode="NoResize" Topmost="True">
+        Height="315" Width="400" ResizeMode="NoResize" Topmost="True"
+        Closed="FormMainWindow_Closed">
     <Grid>
         <StackPanel Orientation="Vertical">
 

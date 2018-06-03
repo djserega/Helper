@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Helper
 {
@@ -10,12 +11,32 @@ namespace Helper
     {
         internal SenderInfo SenderInfo { get; set; }
 
-        internal void SendMessage()
+        internal bool SendMessage()
         {
             if (SenderInfo == null)
                 throw new NullReferenceException("Не заполнен объект отправки сообщения.");
 
+            DefaultSettings settings = new DefaultSettings();
 
+            try
+            {
+                settings.GetDefaultSettings();
+            }
+            catch (Exception)
+            {
+                try
+                {
+                    settings.SetDefaultSettings();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                return false;
+            }
+            
+
+            return true;
         }
     }
 }

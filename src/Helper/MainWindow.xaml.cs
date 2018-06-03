@@ -22,7 +22,7 @@ namespace Helper
     {
         public string MessageSubject { get; set; }
         public string MessageText { get; set; }
-        private SenderInfo _senderInfo;
+        private SenderInfo _senderInfo = new SenderInfo();
 
         public MainWindow()
         {
@@ -48,11 +48,18 @@ namespace Helper
                 return;
             }
 
-
             _senderInfo.Subject = MessageSubject;
             _senderInfo.Text = MessageText;
 
-
+            Sender senderMail = new Sender() { SenderInfo = _senderInfo };
+            if (senderMail.SendMessage())
+            {
+                MessageBox.Show("Сообщение успешно отправлено.");
+            }
+            else
+            {
+                MessageBox.Show("Ошибка отправки сообщения.");
+            }
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)

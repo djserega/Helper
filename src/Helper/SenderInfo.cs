@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace Helper
 {
-    internal class Sender : IDisposable
+    internal class SenderInfo : IDisposable
     {
         private string _tempDirectory;
 
@@ -19,7 +19,7 @@ namespace Helper
         internal string Text { get; set; }
         internal Bitmap[] Screens { get; private set; }
 
-        public Sender()
+        public SenderInfo()
         {
             _tempDirectory = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
