@@ -14,21 +14,25 @@ namespace Helper
 {
     internal class SenderInfo : IDisposable
     {
+        private string _tempDirectoryHelper;
         private string _tempDirectory;
 
         internal string Subject { get; set; }
         internal string Text { get; set; }
-        //internal Bitmap[] Screens { get; private set; }
         internal List<string> Screens { get; private set; }
 
         public SenderInfo()
         {
-            _tempDirectory = Path.Combine(
+            _tempDirectoryHelper = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "Hepler");
-            DirectoryInfo directoryInfo = new DirectoryInfo(_tempDirectory);
-            if (!directoryInfo.Exists)
-                directoryInfo.Create();
+
+            _tempDirectory = Path.Combine(
+                _tempDirectoryHelper,
+                "Screens");
+
+            CreateDirectory(_tempDirectoryHelper);
+            CreateDirectory(_tempDirectory);
 
             Screens = new List<string>();
         }
@@ -39,18 +43,16 @@ namespace Helper
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(_tempDirectory);
                 if (directoryInfo.Exists)
-                    directoryInfo.Delete();
+                    directoryInfo.Delete(true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+
             }
         }
 
-        internal void GetScreens(byte count = 1)
+        internal void GetScreens()
         {
-            if (count < 1)
-                count = 1;
-
             int screenLeft = (int)SystemParameters.VirtualScreenLeft;
             int screenTop = (int)SystemParameters.VirtualScreenTop;
             int screenWidth = (int)SystemParameters.VirtualScreenWidth;
@@ -92,5 +94,11 @@ namespace Helper
             return null;
         }
 
+        private void CreateDirectory(string path)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            if (!directoryInfo.Exists)
+                directoryInfo.Create();
+        }
     }
 }
