@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Text;
+//using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -17,13 +18,19 @@ namespace Helper
 
         internal string Subject { get; set; }
         internal string Text { get; set; }
-        internal Bitmap[] Screens { get; private set; }
+        //internal Bitmap[] Screens { get; private set; }
+        internal List<string> Screens { get; private set; }
 
         public SenderInfo()
         {
             _tempDirectory = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "Hepler");
+            DirectoryInfo directoryInfo = new DirectoryInfo(_tempDirectory);
+            if (!directoryInfo.Exists)
+                directoryInfo.Create();
+
+            Screens = new List<string>();
         }
 
         public void Dispose()
@@ -49,22 +56,40 @@ namespace Helper
             int screenWidth = (int)SystemParameters.VirtualScreenWidth;
             int screenHeight = (int)SystemParameters.VirtualScreenHeight;
 
-            List<Bitmap> listBitMap = new List<Bitmap>();
+            Screens.Clear();
 
             using (Bitmap bitmap = new Bitmap(screenWidth, screenHeight))
             {
                 using (Graphics graphics = Graphics.FromImage(bitmap))
                 {
                     graphics.CopyFromScreen(screenLeft, screenTop, 0, 0, bitmap.Size);
-                    listBitMap.Add(bitmap);                                     
+                    
+                    var encoderParameters = new EncoderParameters(1);
+                    encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 25L);
 
-                    //string filename = "screen-" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".png";
-                    //bitmap.Save(Path.Combine(_tempDirectory, filename));
+                    string fileName = "screen-" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".png";
+                    string fullName = Path.Combine(_tempDirectory, fileName);
+                    bitmap.Save(
+                        fullName,
+                        GetEncoderInfo("image/png"),
+                        encoderParameters);
+
+                    Screens.Add(fullName);
                 }
             }
+        }
 
-            Screens = listBitMap.ToArray();
-
+        private ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int i;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (i = 0; i < encoders.Length; ++i)
+            {
+                if (encoders[i].MimeType == mimeType)
+                    return encoders[i];
+            }
+            return null;
         }
 
     }

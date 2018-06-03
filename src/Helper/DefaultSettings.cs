@@ -15,6 +15,10 @@ namespace Helper
         internal int Port { get; private set; }
         internal string MailName { get; private set; }
 
+        internal string CurrentUserName { get; }
+
+        internal string MailFrom { get => CurrentUserName + "@" + DomainName; }
+        internal string MailTo { get => MailName + "@" + DomainName; }
 
         private readonly string _prefixRegistrySoftware;
         private readonly string _prefixKeyApplication;
@@ -28,6 +32,8 @@ namespace Helper
             _prefixRegistrySoftware = "Software";
             _prefixKeyApplication = "Helper";
             _prefixRegistryKey = _prefixRegistrySoftware + "\\" + _prefixKeyApplication;
+
+            CurrentUserName = Environment.UserName;
         }
 
         internal void GetDefaultSettings()
@@ -38,6 +44,8 @@ namespace Helper
                 {
                     using (RegistryKey registryKeyApplication = currentUser.OpenSubKey(_prefixRegistryKey))
                     {
+                        _registryKeyApplication = registryKeyApplication;
+
                         Server = GetValue("server");
                         Port = int.Parse(GetValue("port"));
                         DomainName = GetValue("domainname");
