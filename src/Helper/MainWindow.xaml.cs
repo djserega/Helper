@@ -22,11 +22,13 @@ namespace Helper
     {
         public string MessageSubject { get; set; }
         public string MessageText { get; set; }
-
+        private SenderInfo _senderInfo;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _senderInfo.GetScreens();
 
             DataContext = this;
         }
@@ -45,11 +47,22 @@ namespace Helper
                 TextBoxMessageText.Focus();
                 return;
             }
+
+
+            _senderInfo.Subject = MessageSubject;
+            _senderInfo.Text = MessageText;
+
+
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void FormMainWindow_Closed(object sender, EventArgs e)
+        {
+            _senderInfo.Dispose();
         }
     }
 }
