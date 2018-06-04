@@ -8,7 +8,7 @@
         Background="Teal" 
         x:Name="FormMainWindow" Title="Helper. TEXT LOGO"
         Height="315" Width="400" ResizeMode="NoResize" Topmost="True"
-        Closed="FormMainWindow_Closed" Icon="pack://siteoforigin:,,,/Resources/helper.png">
+        Closed="FormMainWindow_Closed">
     <Grid>
         <StackPanel Orientation="Vertical">
 

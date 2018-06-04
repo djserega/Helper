@@ -7,9 +7,12 @@
         mc:Ignorable="d"
         Background="Teal"
         Title="Helper" Height="128" Width="128" 
-        ResizeMode="NoResize" Icon="pack://siteoforigin:,,,/Resources/helper.png">
+        ResizeMode="NoResize">
     <Grid>
         <Button x:Name="ButtonHelper" Margin="5,5" BorderThickness="0" Click="ButtonHelper_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="helper.png" Stretch="Uniform"/>
+            </Button.Background>
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
                     <Border x:Name="border" Background="{TemplateBinding Background}"/>
@@ -26,9 +29,6 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
-            <Button.Background>
-                <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/helper.png"/>
-            </Button.Background>
         </Button>
     </Grid>
 </Window>
