@@ -55,6 +55,7 @@ namespace Helper
             if (senderMail.SendMessage())
             {
                 MessageBox.Show("Сообщение успешно отправлено.");
+                Close();
             }
             else
             {
