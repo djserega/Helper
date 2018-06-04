@@ -58,7 +58,7 @@ namespace Helper
 
                     using (SmtpClient client = new SmtpClient(settings.Server, settings.Port)
                     {
-                        EnableSsl = true,
+                        //EnableSsl = true,
                         UseDefaultCredentials = true,
                         Timeout = 10 * 1000
                     })
