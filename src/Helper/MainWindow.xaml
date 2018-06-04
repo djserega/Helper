@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:Helper"
         mc:Ignorable="d"
         Background="Teal" 
-        x:Name="FormMainWindow" Title="Helper. TEXT LOGO"
+        x:Name="FormMainWindow" Title="Helper. "
         Height="315" Width="400" ResizeMode="NoResize" Topmost="True"
         Closed="FormMainWindow_Closed">
     <Grid>
         <StackPanel Orientation="Vertical">
 
-            <Label Content="TEXT LOGO" FontWeight="Bold" FontSize="20" Foreground="LightSteelBlue" HorizontalAlignment="Center"/>
+            <Label x:Name="LabelTextLogo" Content="TEXT LOGO" FontWeight="Bold" FontSize="20" Foreground="LightSteelBlue" HorizontalAlignment="Center"/>
 
             <StackPanel Orientation="Horizontal">
                 <Label Content="Тема" MinWidth="80" Foreground="LightSteelBlue"/>

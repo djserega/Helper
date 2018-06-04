@@ -10,10 +10,22 @@ namespace Helper
 {
     internal class DefaultSettings
     {
+        private string _textLogo;
+
         internal string DomainName { get; private set; }
         internal string Server { get; private set; }
         internal int Port { get; private set; }
         internal string MailName { get; private set; }
+        internal string TextLogo
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_textLogo))
+                    return "TEXT LOGO";
+                else
+                    return _textLogo;
+            }
+        }
 
         internal string CurrentUserName { get; }
 
@@ -27,13 +39,25 @@ namespace Helper
         private RegistryKey _registryKeyApplication;
         private RegistryKey _registryKeyApplicationValues;
 
-        internal DefaultSettings()
+        internal DefaultSettings(bool getSettings = false)
         {
             _prefixRegistrySoftware = "Software";
             _prefixKeyApplication = "Helper";
             _prefixRegistryKey = _prefixRegistrySoftware + "\\" + _prefixKeyApplication;
 
             CurrentUserName = Environment.UserName;
+
+            if (getSettings)
+            {
+                try
+                {
+                    GetDefaultSettings();
+                }
+                catch (Exception)
+                {
+                    SetDefaultSettings();
+                }
+            }
         }
 
         internal void GetDefaultSettings()
@@ -50,6 +74,7 @@ namespace Helper
                         Port = int.Parse(GetValue("port"));
                         DomainName = GetValue("domainname");
                         MailName = GetValue("mailname");
+                        _textLogo = GetValue("textlogo");
                     }
                 }
 
@@ -89,6 +114,7 @@ namespace Helper
                         SetValueIfNotFinded(names, "port");
                         SetValueIfNotFinded(names, "domainname");
                         SetValueIfNotFinded(names, "mailname");
+                        SetValueIfNotFinded(names, "textlogo");
                     }
                 }
             }

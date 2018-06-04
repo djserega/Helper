@@ -28,6 +28,10 @@ namespace Helper
         {
             InitializeComponent();
 
+            string textLogo = new DefaultSettings(true).TextLogo;
+            Title += textLogo;
+            LabelTextLogo.Content = textLogo;
+
             _senderInfo.GetScreens();
 
             DataContext = this;
