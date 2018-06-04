@@ -19,16 +19,39 @@ namespace Helper
     /// </summary>
     public partial class StartUpWindow : Window
     {
+        private Notify _notify;
+        private NotifyIconEvents _notifyIconEvents;
+
         public StartUpWindow()
         {
             InitializeComponent();
+
+            _notifyIconEvents = new NotifyIconEvents();
+            _notifyIconEvents.NotifyIconEvent += _notifyIconEvents_NotifyIconEvent;
+
+            _notify = new Notify(_notifyIconEvents);
+        }
+
+        private void _notifyIconEvents_NotifyIconEvent()
+        {
+            ShowMainWindow();
         }
 
         private void ButtonHelper_Click(object sender, RoutedEventArgs e)
         {
+            ShowMainWindow();
+        }
+
+        private void ShowMainWindow()
+        {
             Visibility = Visibility.Collapsed;
             new MainWindow().ShowDialog();
             Visibility = Visibility.Visible;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _notify.Dispose();
         }
     }
 }

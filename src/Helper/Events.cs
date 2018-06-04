@@ -19,6 +19,21 @@ namespace Helper
 
             GlobalHotKeyOpenFormMessage();
         }
+    }
 
+
+    internal delegate void NotifyIconEvent();
+
+    internal class NotifyIconEvents : EventArgs
+    {
+        internal event NotifyIconEvent NotifyIconEvent;
+
+        internal void EvokeNotifyIconEvent()
+        {
+            if (NotifyIconEvent == null)
+                return;
+
+            NotifyIconEvent();
+        }
     }
 }
