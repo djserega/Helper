@@ -21,7 +21,7 @@ namespace Helper
             _notifyIcon = new WF.NotifyIcon()
             {
                 BalloonTipIcon = WF.ToolTipIcon.Info,
-                //ContextMenu = ,
+                ContextMenu = CreateContextMenu(),
                 Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location)
             };
             _notifyIcon.MouseDoubleClick += _notifyIcon_MouseDoubleClick;
@@ -35,6 +35,37 @@ namespace Helper
         }
 
         private void _notifyIcon_MouseDoubleClick(object sender, WF.MouseEventArgs e)
+        {
+            _notifyIconEvents.EvokeNotifyIconEvent();
+        }
+
+        private WF.ContextMenu CreateContextMenu()
+        {
+            WF.ContextMenu ContextMenuHelper = new WF.ContextMenu();
+
+            var HelperMenu = ContextMenuHelper.MenuItems;
+
+            WF.MenuItem HelperElementSend = HelperMenu.Add("Отправить ошибку");
+            HelperElementSend.Click += HelperElement_Send_Click;
+            HelperElementSend.DefaultItem = true;
+            HelperElementSend.Name = "SendError";
+            
+            HelperMenu.Add("-");
+
+
+            WF.MenuItem HelperElementExit = HelperMenu.Add("Выйти");
+            HelperElementExit.Click += HelperElementExit_Click;
+            HelperElementExit.Name = "ExitHelper";
+
+            return ContextMenuHelper;
+        }
+
+        private void HelperElementExit_Click(object sender, EventArgs e)
+        {
+            _notifyIconEvents.EvokeNotifyIconEvent();
+        }
+
+        private void HelperElement_Send_Click(object sender, EventArgs e)
         {
             _notifyIconEvents.EvokeNotifyIconEvent();
         }

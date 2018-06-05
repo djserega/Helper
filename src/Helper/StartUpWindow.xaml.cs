@@ -34,7 +34,8 @@ namespace Helper
 
         private void _notifyIconEvents_NotifyIconEvent()
         {
-            ShowMainWindow();
+            //ShowMainWindow();
+            Show();
         }
 
         private void ButtonHelper_Click(object sender, RoutedEventArgs e)
@@ -52,6 +53,11 @@ namespace Helper
         private void Window_Closed(object sender, EventArgs e)
         {
             _notify.Dispose();
+        }
+
+        private void ButtonHideToTray_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
         }
     }
 }
