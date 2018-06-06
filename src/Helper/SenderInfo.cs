@@ -25,7 +25,7 @@ namespace Helper
         {
             _tempDirectoryHelper = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Hepler");
+                "Helper");
 
             _tempDirectory = Path.Combine(
                 _tempDirectoryHelper,
