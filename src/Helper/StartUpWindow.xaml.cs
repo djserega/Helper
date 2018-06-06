@@ -68,7 +68,6 @@ namespace Helper
 
         private void ShowMainWindow()
         {
-            Show();
             Visibility = Visibility.Collapsed;
             new MainWindow().ShowDialog();
             Hide();
