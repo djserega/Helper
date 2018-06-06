@@ -21,20 +21,43 @@ namespace Helper
     {
         private Notify _notify;
         private NotifyIconEvents _notifyIconEvents;
+        private GlobalHotKeyEvents _globalHotKeyEvents;
+        private GlobalHotKeyManager _globalHotKeyManager;
 
         public StartUpWindow()
         {
             InitializeComponent();
 
+            _globalHotKeyEvents = new GlobalHotKeyEvents();
+            _globalHotKeyEvents.GlobalHotKeyOpenFormMessage += _globalHotKeyEvents_GlobalHotKeyOpenFormMessage;
+
             _notifyIconEvents = new NotifyIconEvents();
-            _notifyIconEvents.NotifyIconEvent += _notifyIconEvents_NotifyIconEvent;
+            _notifyIconEvents.NotifyIconOpenFormEvent += _notifyIconEvents_NotifyIconOpenFormEvent;
+            _notifyIconEvents.NotifyIconShowFormMessageEvent += _notifyIconEvents_NotifyIconShowFormMessageEvent;
+            _notifyIconEvents.NotifyIconExitAppEvent += _notifyIconEvents_NotifyIconExitAppEvent;
 
             _notify = new Notify(_notifyIconEvents);
+
+            _globalHotKeyManager = new GlobalHotKeyManager(_globalHotKeyEvents);
         }
 
-        private void _notifyIconEvents_NotifyIconEvent()
+        private void _globalHotKeyEvents_GlobalHotKeyOpenFormMessage()
         {
-            //ShowMainWindow();
+            ShowMainWindow();
+        }
+
+        private void _notifyIconEvents_NotifyIconExitAppEvent()
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void _notifyIconEvents_NotifyIconShowFormMessageEvent()
+        {
+            ShowMainWindow();
+        }
+
+        private void _notifyIconEvents_NotifyIconOpenFormEvent()
+        {
             Show();
         }
 
@@ -45,9 +68,10 @@ namespace Helper
 
         private void ShowMainWindow()
         {
+            Show();
             Visibility = Visibility.Collapsed;
             new MainWindow().ShowDialog();
-            Visibility = Visibility.Visible;
+            Hide();
         }
 
         private void Window_Closed(object sender, EventArgs e)

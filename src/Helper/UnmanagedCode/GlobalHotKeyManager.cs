@@ -49,8 +49,7 @@ namespace Helper
                     PressedLeftAlt = false;
                     PressedPrntScr = false;
                     
-                    if (PressedPrntScr)
-                        _globalHotKeyEvents.EvokeOpenFormMessageEvent();
+                    _globalHotKeyEvents.EvokeOpenFormMessageEvent();
                 }
             }
         }

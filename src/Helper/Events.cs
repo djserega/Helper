@@ -22,18 +22,39 @@ namespace Helper
     }
 
 
-    internal delegate void NotifyIconEvent();
+    internal delegate void NotifyIconOpenFormEvent();
+    internal delegate void NotifyIconShowFormMessageEvent();
+    internal delegate void NotifyIconExitAppEvent();
+
 
     internal class NotifyIconEvents : EventArgs
     {
-        internal event NotifyIconEvent NotifyIconEvent;
+        internal event NotifyIconOpenFormEvent NotifyIconOpenFormEvent;
+        internal event NotifyIconShowFormMessageEvent NotifyIconShowFormMessageEvent;
+        internal event NotifyIconExitAppEvent NotifyIconExitAppEvent;
 
-        internal void EvokeNotifyIconEvent()
+        internal void EvokeNotifyIconOpenFormEvent()
         {
-            if (NotifyIconEvent == null)
+            if (NotifyIconOpenFormEvent == null)
                 return;
 
-            NotifyIconEvent();
+            NotifyIconOpenFormEvent();
+        }
+
+        internal void EvokeNotifyIconShowFormMessageEvent()
+        {
+            if (NotifyIconShowFormMessageEvent == null)
+                return;
+
+            NotifyIconShowFormMessageEvent();
+        }
+
+        internal void EvokeNotifyIconExitAppEvent()
+        {
+            if (NotifyIconExitAppEvent == null)
+                return;
+
+            NotifyIconExitAppEvent();
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Helper
 
         private void _notifyIcon_MouseDoubleClick(object sender, WF.MouseEventArgs e)
         {
-            _notifyIconEvents.EvokeNotifyIconEvent();
+            _notifyIconEvents.EvokeNotifyIconShowFormMessageEvent();
         }
 
         private WF.ContextMenu CreateContextMenu()
@@ -49,9 +49,12 @@ namespace Helper
             HelperElementSend.Click += HelperElement_Send_Click;
             HelperElementSend.DefaultItem = true;
             HelperElementSend.Name = "SendError";
-            
-            HelperMenu.Add("-");
 
+            WF.MenuItem HelperElementOpen = HelperMenu.Add("Открыть");
+            HelperElementOpen.Click += HelperElementOpen_Click;
+            HelperElementOpen.Name = "OpenForm";
+
+            HelperMenu.Add("-");
 
             WF.MenuItem HelperElementExit = HelperMenu.Add("Выйти");
             HelperElementExit.Click += HelperElementExit_Click;
@@ -60,14 +63,19 @@ namespace Helper
             return ContextMenuHelper;
         }
 
+        private void HelperElementOpen_Click(object sender, EventArgs e)
+        {
+            _notifyIconEvents.EvokeNotifyIconOpenFormEvent();
+        }
+
         private void HelperElementExit_Click(object sender, EventArgs e)
         {
-            _notifyIconEvents.EvokeNotifyIconEvent();
+            _notifyIconEvents.EvokeNotifyIconExitAppEvent();
         }
 
         private void HelperElement_Send_Click(object sender, EventArgs e)
         {
-            _notifyIconEvents.EvokeNotifyIconEvent();
+            _notifyIconEvents.EvokeNotifyIconShowFormMessageEvent();
         }
     }
 }
