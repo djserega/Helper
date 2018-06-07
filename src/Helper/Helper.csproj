@@ -63,7 +63,9 @@
     </ApplicationDefinition>
     <Compile Include="DefaultSettings.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="Notify.cs" />
+    <Compile Include="Permission.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

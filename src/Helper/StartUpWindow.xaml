@@ -31,6 +31,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="ButtonHideToTray" Content="Свернуть в трей" VerticalAlignment="Bottom" Background="Teal" BorderThickness="0" Click="ButtonHideToTray_Click"/>
+        <Button x:Name="ButtonHideToTray" Content="Свернуть в трей" VerticalAlignment="Bottom" Background="Teal" BorderThickness="0" Click="ButtonHideToTray_Click" MouseRightButtonDown="ButtonHideToTray_MouseRightButtonDown"/>
     </Grid>
 </Window>

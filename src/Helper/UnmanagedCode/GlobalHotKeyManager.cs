@@ -15,9 +15,11 @@ namespace Helper
 
         internal bool PressedLeftAlt { get; private set; }
         internal bool PressedPrntScr { get; private set; }
+        internal bool PressedLeftCtrl { get; private set; }
         
         private const Key _keyLeftAlt = Key.LeftAlt;
         private const Key _keyPrntScr = Key.PrintScreen;
+        private const Key _KeyLeftCtrl = Key.LeftCtrl;
 
         internal GlobalHotKeyManager(GlobalHotKeyEvents globalHotKeyEvents)
         {
@@ -39,6 +41,9 @@ namespace Helper
                     break;
                 case _keyPrntScr:
                     PressedPrntScr = true;
+                    break;
+                case _KeyLeftCtrl:
+                    PressedLeftCtrl = true;
                     break;
             }
 
@@ -63,6 +68,9 @@ namespace Helper
                     break;
                 case _keyPrntScr:
                     PressedPrntScr = false;
+                    break;
+                case _KeyLeftCtrl:
+                    PressedLeftCtrl = false;
                     break;
             }
         }
