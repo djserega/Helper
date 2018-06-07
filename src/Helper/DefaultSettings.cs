@@ -1,16 +1,14 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Helper
 {
     internal class DefaultSettings
     {
         private string _textLogo;
+
+        #region Internal properties
 
         internal string DomainName { get; private set; }
         internal string Server { get; private set; }
@@ -31,6 +29,8 @@ namespace Helper
 
         internal string MailFrom { get => CurrentUserName + "@" + DomainName; }
         internal string MailTo { get => MailName + "@" + DomainName; }
+
+        #endregion
 
         private readonly string _prefixRegistrySoftware;
         private readonly string _prefixKeyApplication;

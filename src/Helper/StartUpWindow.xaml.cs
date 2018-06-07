@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Helper
 {
@@ -19,18 +10,23 @@ namespace Helper
     /// </summary>
     public partial class StartUpWindow : Window
     {
+   
+        #region Private fields
+
         private bool _runWithAdmin;
         private Notify _notify;
         private NotifyIconEvents _notifyIconEvents;
         private GlobalHotKeyEvents _globalHotKeyEvents;
         private GlobalHotKeyManager _globalHotKeyManager;
 
+        #endregion
+
         public StartUpWindow()
         {
             InitializeComponent();
 
             CheckCommandLineArgs();
-            
+
             _globalHotKeyEvents = new GlobalHotKeyEvents();
             _globalHotKeyEvents.GlobalHotKeyOpenFormMessage += _globalHotKeyEvents_GlobalHotKeyOpenFormMessage;
 
@@ -45,47 +41,29 @@ namespace Helper
 
         }
 
-        private void _globalHotKeyEvents_GlobalHotKeyOpenFormMessage()
-        {
-            ShowMainWindow();
-        }
+        #region Window events
 
-        private void _notifyIconEvents_NotifyIconExitAppEvent()
-        {
-            Application.Current.Shutdown();
-        }
+        private void Window_Closed(object sender, EventArgs e) => _notify.Dispose();
 
-        private void _notifyIconEvents_NotifyIconShowFormMessageEvent()
-        {
-            ShowMainWindow();
-        }
+        #endregion
 
-        private void _notifyIconEvents_NotifyIconOpenFormEvent()
-        {
-            Show();
-        }
+        #region Events
 
-        private void ButtonHelper_Click(object sender, RoutedEventArgs e)
-        {
-            ShowMainWindow();
-        }
+        private void _globalHotKeyEvents_GlobalHotKeyOpenFormMessage() => ShowMainWindow();
 
-        private void ShowMainWindow()
-        {
-            Visibility = Visibility.Collapsed;
-            new MainWindow().ShowDialog();
-            Hide();
-        }
+        private void _notifyIconEvents_NotifyIconExitAppEvent() => Application.Current.Shutdown();
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            _notify.Dispose();
-        }
+        private void _notifyIconEvents_NotifyIconShowFormMessageEvent() => ShowMainWindow();
 
-        private void ButtonHideToTray_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-        }
+        private void _notifyIconEvents_NotifyIconOpenFormEvent() => Show();
+
+        #endregion
+
+        #region Elements events
+
+        private void ButtonHelper_Click(object sender, RoutedEventArgs e) => ShowMainWindow();
+
+        private void ButtonHideToTray_Click(object sender, RoutedEventArgs e) => Hide();
 
         private void ButtonHideToTray_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -119,6 +97,15 @@ namespace Helper
             }
         }
 
+        #endregion
+
+        private void ShowMainWindow()
+        {
+            Visibility = Visibility.Collapsed;
+            new MainWindow().ShowDialog();
+            Hide();
+        }
+
         private void CheckCommandLineArgs()
         {
             string[] commandLine = Environment.GetCommandLineArgs();
@@ -130,12 +117,13 @@ namespace Helper
 
                 if (!_runWithAdmin)
                 {
-                    if (commandLine[1]  == "/hidetotray")
+                    if (commandLine[1] == "/hidetotray")
                     {
                         Hide();
                     }
                 }
             }
         }
+
     }
 }
